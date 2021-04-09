@@ -20,6 +20,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+
+Route::prefix('key')->group(function () {
+    Route::get('get', [ApiKeyController::class, 'get_token']);
+    Route::get('get/strict', [ApiKeyController::class, 'get_token']);
+});
+
 Route::prefix('email')->group(function () {
-    Route::get('key', [ApiKeyController::class, 'get_token']);
+    
 });
