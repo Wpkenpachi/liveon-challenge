@@ -30,7 +30,7 @@ class ApiKeyController extends Controller
 
     public function get_strict_key(Request $request) {
         $api_key = (string) Str::uuid();
-        $ip = $request->ip();
+        $ip = $request->getIp();
         try {
             DB::beginTransaction();
 
