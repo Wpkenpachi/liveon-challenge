@@ -23,7 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::prefix('key')->group(function () {
     Route::get('get', [ApiKeyController::class, 'get_token']);
-    Route::get('get/strict', [ApiKeyController::class, 'get_token']);
+    Route::get('strict', [ApiKeyController::class, 'get_strict_key']);
 });
 
 Route::prefix('email')->group(function () {

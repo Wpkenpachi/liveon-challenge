@@ -15,6 +15,8 @@ class CreateApiKeysTable extends Migration
     {
         Schema::create('api_keys', function (Blueprint $table) {
             $table->id();
+            $table->string('api_key');
+            $table->string('related_ip_address')->nullable();
             $table->timestamps();
         });
     }

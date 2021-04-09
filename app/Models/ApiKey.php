@@ -10,7 +10,7 @@ class ApiKey extends Model
     use HasFactory;
 
     protected $fillable = [
-        'key_key',
+        'api_key',
         'related_ip_address'
     ];
 }
