@@ -40,7 +40,7 @@ class ApiKeyController extends Controller
             ]);
             $payload = collect($api_key_created)->except(['id']);
             DB::commit();
-            return response()->json($api_key_created);
+            return response()->json($payload);
         } catch (\Throwable $th) {
             DB::rollback();
             return response()->json([
