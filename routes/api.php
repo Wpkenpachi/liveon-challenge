@@ -4,6 +4,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ApiKeyController;
+use App\Http\Controllers\SendEmailController;
+
+use App\Services\SendEmailService;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,13 +22,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-
 Route::prefix('key')->group(function () {
-    Route::get('get', [ApiKeyController::class, 'get_token']);
-    Route::get('strict', [ApiKeyController::class, 'get_strict_key']);
+    Route::post('send', [ApiKeyController::class, 'send_token']);
 });
 
 Route::prefix('email')->group(function () {
-    
+    Route::post('send', [SendEmailController::class, 'custome_email'])->middleware('related_ip_address');
 });

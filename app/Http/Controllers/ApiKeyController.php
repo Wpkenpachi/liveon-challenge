@@ -4,61 +4,52 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
-use App\Models\ApiKey;
+use App\Repositories\ApiKeyRepository;
+use Illuminate\Support\Facades\Validator;
+use App\Services\ClientRequestService;
+use App\Services\SendEmailService;
 
 class ApiKeyController extends Controller
 {
-    public function get_token(Request $request) {
-        $api_key = (string) Str::uuid();
-        try {
-            DB::beginTransaction();
+    protected $ApiKeyRepository;
 
-            $api_key_created = ApiKey::create([
-                'api_key' => $api_key
-            ]);
-            $payload = collect($api_key_created)->except(['id']);
-            DB::commit();
-            return response()->json($payload);
-        } catch (\Throwable $th) {
-            DB::rollback();
-            return response()->json([
-                'error' => $th->getMessage()
-            ], 400);
-        }
+    public function __construct() {
+        $this->ApiKeyRepository = new ApiKeyRepository();
     }
 
-    private function getIp(){
-        foreach (array('HTTP_CLIENT_IP', 'HTTP_X_FORWARDED_FOR', 'HTTP_X_FORWARDED', 'HTTP_X_CLUSTER_CLIENT_IP', 'HTTP_FORWARDED_FOR', 'HTTP_FORWARDED', 'REMOTE_ADDR') as $key){
-            if (array_key_exists($key, $_SERVER) === true){
-                foreach (explode(',', $_SERVER[$key]) as $ip){
-                    $ip = trim($ip); // just to be safe
-                    if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) !== false){
-                        return $ip;
-                    }
-                }
-            }
+    public function send_token(Request $request) {
+        // Getting/Generating data
+        $api_key = $request->get('key');
+        $related_ip_address = $request->get('related_ip_address');
+        $related_ip_address = $related_ip_address ? implode(";", $related_ip_address) : null;
+        $data = [
+            'api_key' =>  $api_key,
+            'related_ip_address' => $request->get('related_ip_address')
+        ];
+
+        // Validating
+        $validator = Validator::make($data, [
+            'api_key' => 'required',
+            'related_ip_address' => 'nullable|array'
+        ], [
+            'api_key.required' => 'ApiKey Could Not Be Geenrated',
+            'related_ip_address.required' => 'Client Ip Could not be found'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
         }
-    }
 
-    public function get_strict_key(Request $request) {
-        $api_key = (string) Str::uuid();
-        $ip = $this->getIp();
+        // Store Token
         try {
-            DB::beginTransaction();
-
-            $api_key_created = ApiKey::create([
-                'api_key' => $api_key,
-                'related_ip_address' => $ip
-            ]);
-            $payload = collect($api_key_created)->except(['id']);
-            DB::commit();
-            return response()->json($payload);
+            $token_validation = SendEmailService::validate_key($request->get('key'));
+            if ($token_validation != 200) throw new \Exception("Invalid Api Key");
+            $response = $this->ApiKeyRepository->store_strict_token($api_key, $related_ip_address);
+            return response()->json($response);
         } catch (\Throwable $th) {
-            DB::rollback();
             return response()->json([
                 'error' => $th->getMessage()
-            ], 400);
+            ]);
         }
     }
 }
