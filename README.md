@@ -1,62 +1,82 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# <a target='_blank'><img align="left" width=50px height=50px src='https://user-images.githubusercontent.com/54849358/79355817-8d9a6200-7f14-11ea-9c3c-5ba42c4ce12a.png' /></a> Desafio de Mensageria em Microserviço
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+_É de suma importancia que você leia até o final antes de começar a fazer o desafio_
 
-## About Laravel
+<br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## <a target='_blank'><img align="left" width=40px height=40px src='https://user-images.githubusercontent.com/54849358/79353989-2f6c7f80-7f12-11ea-8f2a-39aaf259ad81.png' /></a> Bem-Vindo pequeno Padawan ao nosso desafio
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Aqui seus conhecimentos serão testados! Sua capacidade de lidar com problemas será testada! Sua força Jedi será testada! Então preparece, e se caso não estiver pronto... Bom, volte em outro momento, estaremos aguardando sua chegada. Que a Força esteja com você.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+ <br>
+ 
+ ## <a target='_blank'><img align="left" width=40px height=40px src='https://user-images.githubusercontent.com/54849358/79355150-afdfb000-7f13-11ea-9626-dbc376e40f8f.png' /></a> Não nos conhece?
+ 
+ Somos uma equipe de desenvolvedores e lidamos com os mais diversos tipos de desafios todos os dias como este pequeno teste, e precisamos de novos aliados para nos ajudar com a resistencia contra o lado sombrio, caso esteja apto, você terá um grupo de Jedis habilidosos ao seu lado para ajudar em sua jornada, e talvez um dia você olhe para trás e veja o quão tranquilo foi essa batalha.
+ 
+ Não há mais tempo, se você chegou até aqui, precisamos de novos combatentes!
+  
+<br>
 
-## Learning Laravel
+## <a target='_blank'><img align="left" width=40px height=40px src='https://user-images.githubusercontent.com/54849358/79358887-372f2280-7f18-11ea-9c5f-a1da33e7a719.png' /></a> Regras
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Regras de Setup
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+-   Padrão da API deve ser Restful (utilizando json);
+-   Faça a API na sua Stack de preferencia (acordado na entrevista);
+-   Utilize o MongoDB ou Postgres como banco de dados da aplicação;
 
-## Laravel Sponsors
+### Requisitos Funcionais
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+-   A aplicação deve ser capaz de receber uma key de integração;
+-   A aplicação deve ser capaz de validar a existência da key internamente;
+-   A aplicação deve ser capaz de receber requisições apenas de servidores permitidos (host e/ou ip);
+-   A aplicação deve ser capaz de receber via api um conteúdo HTML que será enviado no email;
+-   A aplicação deve ser capaz de disparar emails para os destinos informados;
+-   A aplicação deve ser capaz de receber multiplos destinatários e enviar os emails;
+-   A aplicação deve retornar um array com os email enviados com sucesso e os com erro;
 
-### Premium Partners
+### Requisitos não-funcionais
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+-   Use o [Mailgun](https://www.mailgun.com/) para disparar os emails;
+-   Use o banco [MongoDB](https://mongodb.com) ou [Postgres](https://www.postgresql.org/) (se julgar necessário);
+-   A API deve seguir uma estrutura escalável, pensando em uma estrutura de menssageria onde no futuro poderão ser adicionadas outros métodos de envio tais como push notification e sms;
+-   Utilizar variáveis de ambiente (Environment), sem estar hardcoded (digitado no meio codigo). O ideal é utilizar variáveis de ambiente ou arquivos de configuração;
 
-## Contributing
+### Regras de Documentação
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+-   Com tudo feito, gere uma documentação com [ApiDoc](https://apidocjs.com/), [Swagger](https://swagger.io/), [Apiary](https://apiary.io/) ou [Postman](https://www.postman.com/), com todos os endpoints da sua api, com payload e response (Tanto de sucesso quanto de erro).
 
-## Code of Conduct
+<br>
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Extras
 
-## Security Vulnerabilities
+Os itens extras não são obrigatórios, e não afetam sua avaliação caso não seja feito.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Serão considerados extras:
 
-## License
+-   Código bem documentado;
+-   Documentação gerada no codigo da API, por ex com ApiDoc;
+-   Código com funções e variáveis em ingles (PS: Documentação pode ser em portugues ou ingles);
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<br>
+
+## :rocket: Para a entrega do seu desafio.
+
+-   Faça um fork deste projeto em sua conta no [Github](https://github.com/join).
+-   Crie um repositório _privado_, com a solução do seu desafio.
+-   Em seguida, desenvolva o projeto.
+-   Adicione como membros do repositório [@vcteduardo](https://github.com/vcteduardo) e [@luoldrigues](https://github.com/luoldrigues).
+-   Por fim, envie um email informando que concluiu o desafio p/ vagas@liveonsolutions.com. (coloque no assunto o nome do desafio)
+
+<br>
+
+_Muito obrigado Padawan por fazer parte da nossa equipe, agredecemos a sua participação, e que a força estejá com você_
+
+<br>
+
+https://www.liveonbaas.com/
+
+<br>
+
+<a target='_blank'><img align="right" class='header-img' width=230px height=250px src='https://user-images.githubusercontent.com/54849358/78149611-90715f00-740c-11ea-8d21-4654691dca88.png' /></a>
