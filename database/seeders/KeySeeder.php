@@ -14,7 +14,7 @@ class KeySeeder extends Seeder
      */
     public function run()
     {
-        $api_key = "77b643994364a45e3f36c03d9743e188-b892f62e-10b3cef4";
+        $api_key = env('MAILGUN_SECRET');
         ApiKey::updateOrCreate(
             [
                 'api_key' => $api_key
