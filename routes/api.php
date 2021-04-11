@@ -22,6 +22,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('home', function () {
+    return response()->json([
+        'msg' => 'Welcome'
+    ]);
+});
+
 Route::prefix('key')->group(function () {
     Route::post('send', [ApiKeyController::class, 'send_token']);
 });
