@@ -25,7 +25,7 @@ class RelatedIpAddress
         $token_record = ApiKeyRepository::fetch_token_record($x_api_token);
 
         // If has not related ip address to strict access, continue the request
-        if (!$token_record->related_ip_address) return $next($request);
+        if ($token_record && !$token_record->related_ip_address) return $next($request);
 
         $client_ip = ClientRequestService::getIp();
         $client_ip = $client_ip ? $client_ip : $request->ip(); // ->getIp() for balancers and ->ip() for direct request
