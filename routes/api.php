@@ -33,5 +33,5 @@ Route::prefix('key')->group(function () {
 });
 
 Route::prefix('email')->group(function () {
-    Route::post('send', [SendEmailController::class, 'custome_email'])->middleware('related_ip_address');
+    Route::post('send', [SendEmailController::class, 'custom_email'])->middleware('related_ip_address');
 });

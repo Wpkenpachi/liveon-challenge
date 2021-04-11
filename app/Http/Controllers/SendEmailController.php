@@ -15,9 +15,9 @@ class SendEmailController extends Controller
     protected $mg;
     protected $domain;
 
-    public function __construct() {
+    private function MailgunClient($key) {
         $configurator = new HttpClientConfigurator();
-        $configurator->setApiKey(env('MAILGUN_SECRET'));
+        $configurator->setApiKey($key);
         $this->mg = new Mailgun($configurator, new NoopHydrator());
         $exploded_domain = explode('/', env('MAILGUN_DOMAIN'));
         $this->domain = $exploded_domain[ count($exploded_domain)-1 ];
@@ -77,7 +77,7 @@ class SendEmailController extends Controller
         }
     }
 
-    public function custome_email(Request $request) {
+    public function custom_email(Request $request) {
         $validator = Validator::make($request->all(), [
             'from' => 'required|string',
             'subject' => 'required|string',
@@ -90,6 +90,8 @@ class SendEmailController extends Controller
         }
 
         try {
+            $key = $request->header('authorization');
+            $this->MailgunClient($key);
             // Sending Email for Multiple Receivers
             $receivers = $request->get('to');
             foreach ($receivers as $receiver) {
